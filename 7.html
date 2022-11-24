@@ -1,0 +1,66 @@
+<!Doctype HTML>
+<html lang="ru">
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="7.css">
+        <title> Frontend Task №8 </title>
+    </head>
+    <body>
+        <div>
+            <input type="number">
+            <div>
+                <button id="button-rectangle">Квадрат</button>
+                <button id="button-triangle">Треугольник</button>
+                <button id="button-circle">Круг</button>          
+            </div>
+        </div>
+        
+        <div id="canvas" style="position: relative">
+        
+        </div>        
+        
+        <script type="module">
+            
+            function randomIntFromInterval(min, max) { // min and max included 
+                return Math.floor(Math.random() * (max - min + 1) + min)
+            }
+            
+            function createShape(className) {
+                let count = document.querySelector("input").value;
+                
+                for (let i = 0; i < count; ++i) {
+                    let node = document.createElement("div");
+                    node.classList = className;
+                    if (className === "triangle") {
+                        node.style.borderLeft = randomIntFromInterval(100, 200) + "px solid transparent";
+                        node.style.borderRight = node.style.borderLeft;
+                        node.addEventListener("click", e => e.target.style.borderBottom = "100px solid pink");
+                    } else {
+                        node.style.height = randomIntFromInterval(100, 200) + "px";
+                        node.style.width = node.style.height;
+                        node.addEventListener("click", e => e.target.style.background="pink");
+                    }
+                    
+                    node.style.top = randomIntFromInterval(50, 500) + "px";
+                    node.style.left = randomIntFromInterval(10, document.documentElement.clientWidth - 200) + "px";
+                    canvas.appendChild(node);
+                    
+                    
+                    node.addEventListener("dblclick", e => e.target.remove())
+                }                    
+            }
+            
+            let canvas = document.getElementById("canvas");
+            
+            document.getElementById("button-rectangle").addEventListener("click", e => {
+                createShape("rectangle")})
+            document.getElementById("button-triangle").addEventListener("click", e => {
+                createShape("triangle")})
+            document.getElementById("button-circle").addEventListener("click", e => {
+                createShape("circle")})
+            
+        </script>
+        
+        
+    </body>
+</html> 
